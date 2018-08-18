@@ -7,16 +7,16 @@
 
 'use strict';
 
-export const makeId = () => {
+const makeId = () => {
   let date = new Date()
   return ~~(String(date.getTime()) + String(Math.random() * 999))
 }
 
-export const trim = (str) => {
+const trim = (str) => {
   return str.replace(/^\s*/, '').replace(/\s*$/, '')
 }
 
-export const QueryString = (name) => {
+const QueryString = (name) => {
   let reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
   let r = window.location.search.substr(1).match(reg)
   let context = ''
@@ -28,23 +28,23 @@ export const QueryString = (name) => {
   return context === null || context === '' || context === 'undefined' ? '' : context
 }
 
-export const isArray = (data) => {
+const isArray = (data) => {
   return Object.prototype.toString().call(data) === '[object Array]'
 }
 
-export const isArrayBuffer = (data) => {
+const isArrayBuffer = (data) => {
   return Object.prototype.toString().call(data) === '[object ArrayBuffer]'
 }
 
-export const isFormData = (val) => {
+const isFormData = (val) => {
   return (typeof FormData !== 'undefined') && (val instanceof FormData);
 }
 
-export const isURLSearchParams = (val) => {
+const isURLSearchParams = (val) => {
   return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
 }
 
-export const isArrayBufferView = (val) => {
+const isArrayBufferView = (val) => {
   let result;
   if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
     result = ArrayBuffer.isView(val);
@@ -54,47 +54,47 @@ export const isArrayBufferView = (val) => {
   return result;
 }
 
-export const isString = (val) => {
+const isString = (val) => {
   return typeof val === 'string';
 }
 
-export const isNumber = (val) => {
+const isNumber = (val) => {
   return typeof val === 'number';
 }
 
-export const isUndefined = (val) => {
+const isUndefined = (val) => {
   return typeof val === 'undefined';
 }
 
-export const isObject = (val) => {
+const isObject = (val) => {
   return val !== null && typeof val === 'object'
 }
 
-export const isNan = (val) => {
+const isNan = (val) => {
   return typeof val === 'number' && isNaN(val)
 }
 
-export const isDate = (val) => {
+const isDate = (val) => {
   return Object.prototype.toString().call(val) === '[object Date]';
 }
 
-export const isFile = (val) => {
+const isFile = (val) => {
   return Object.prototype.toString().call(val) === '[object File]';
 }
 
-export const isBlob = (val) => {
+const isBlob = (val) => {
   return Object.prototype.toString().call(val) === '[object Blob]';
 }
 
-export const isFunction = (val) => {
+const isFunction = (val) => {
   return Object.prototype.toString().call(val) === '[object Function]';
 }
 
-export const isStream = (val) => {
+const isStream = (val) => {
   return isObject(val) && isFunction(val.pipe);
 }
 
-export const isStandardBrowserEnv = () => {
+const isStandardBrowserEnv = () => {
   if (typeof navigator !== 'undefined' && (navigator.product === 'ReactNative' ||
           navigator.product === 'NativeScript' ||
           navigator.product === 'NS')) {
@@ -111,7 +111,7 @@ export const isStandardBrowserEnv = () => {
  * @param obj
  * @returns {boolean}
  */
-export const isEmptyObject = (obj) => {
+const isEmptyObject = (obj) => {
   for (let key in obj) {
     return false
   }
@@ -123,7 +123,7 @@ export const isEmptyObject = (obj) => {
  * @param tel
  * @returns {boolean}
  */
-export const checkTel = (tel) => {
+const checkTel = (tel) => {
   const rePhone = /^1[3|4|5|7|8][0-9]\d{8}$/
   return rePhone.test(tel)
 }
@@ -134,7 +134,7 @@ export const checkTel = (tel) => {
  * @param maxLen
  * @returns {boolean}
  */
-export const validDataLen = (str, maxLen) => {
+const validDataLen = (str, maxLen) => {
   str = trim(str)
   if (str.length > maxLen || str.length === 0) {
     return false
@@ -149,12 +149,12 @@ export const validDataLen = (str, maxLen) => {
  * @param maxLen
  * @returns {boolean}
  */
-export const validDataLenUnescape = (str, maxLen) => {
+const validDataLenUnescape = (str, maxLen) => {
   str = trim(str)
   return str.length < maxLen
 }
 
-export const unescapeString = (str) => {
+const unescapeString = (str) => {
   str = trim(str)
   return str
       .replace(str ? /&(?!#?\w+;)/g : /&/g, '&')
@@ -177,7 +177,7 @@ export const unescapeString = (str) => {
  * @param containerRatio
  * @returns {{width: *, height: *}}
  */
-export const calculateImageSize = (imgWidth, imgHeight, containerWidth, containerHeight, imgRatio, containerRatio) => {
+const calculateImageSize = (imgWidth, imgHeight, containerWidth, containerHeight, imgRatio, containerRatio) => {
   let newWidth, newHeight
   if (imgRatio >= containerRatio) {
     newWidth = containerWidth
@@ -196,7 +196,7 @@ export const calculateImageSize = (imgWidth, imgHeight, containerWidth, containe
  * 传入 ‘2012-12-12’，传出2012/12/12,供date对象使用
  * @param date
  */
-export const parseDateToString = (date) => {
+const parseDateToString = (date) => {
   return date.replace(/-/g, '/')
 }
 
@@ -205,7 +205,7 @@ export const parseDateToString = (date) => {
  * @param startTime
  * @param endTime
  */
-export const twoDateGap = (startTime, endTime) => {
+const twoDateGap = (startTime, endTime) => {
   return parseInt((endTime.getTime() - startTime.getTime()) / (1000 * 60 * 60 * 24))
 }
 
@@ -217,7 +217,7 @@ export const twoDateGap = (startTime, endTime) => {
  * @param endY
  * @returns {number}
  */
-export const getAngel = (startX, startY, endX, endY) => {
+const getAngel = (startX, startY, endX, endY) => {
   let diffX = endX - startX
   let diffY = endY - startY
   return 360 * Math.atan(diffY / diffX) / (2 * Math.PI)
@@ -228,11 +228,11 @@ export const getAngel = (startX, startY, endX, endY) => {
  * @param n
  * @returns {string}
  */
-export const prefixInteger = (num, n) => {
+const prefixInteger = (num, n) => {
   return (Array(n).join(0) + num).slice(-n)
 }
 
-export const forEach = (obj, fn) => {
+const forEach = (obj, fn) => {
   // Don't bother if no value provided
   if (obj === null || typeof obj === 'undefined') {
     return;
@@ -259,7 +259,7 @@ export const forEach = (obj, fn) => {
   }
 }
 
-export const merge = (/* obj1, obj2, obj3, ... */) => {
+const merge = (/* obj1, obj2, obj3, ... */) => {
   let result = {};
   function assignValue(val, key) {
     if (typeof result[key] === 'object' && typeof val === 'object') {
@@ -275,7 +275,7 @@ export const merge = (/* obj1, obj2, obj3, ... */) => {
   return result;
 }
 
-export const deepMerge = (/* obj1, obj2, obj3, ... */) => {
+const deepMerge = (/* obj1, obj2, obj3, ... */) => {
   let result = {};
   function assignValue(val, key) {
     if (typeof result[key] === 'object' && typeof val === 'object') {
@@ -293,7 +293,7 @@ export const deepMerge = (/* obj1, obj2, obj3, ... */) => {
   return result;
 }
 
-export const bind = (fn, thisArg) => {
+const bind = (fn, thisArg) => {
   return function wrap() {
     let args = new Array(arguments.length);
     for (let i = 0; i < args.length; i++) {//可以用解构函数来简化函数
@@ -303,7 +303,7 @@ export const bind = (fn, thisArg) => {
   };
 };
 
-export const extend = (a, b, thisArg) => {
+const extend = (a, b, thisArg) => {
   forEach(b, function assignValue(val, key) {
     if (thisArg && typeof val === 'function') {
       a[key] = bind(val, thisArg);
@@ -565,7 +565,7 @@ function hexHMACMD5 (k, d) {
   return rstr2hex(rawHMACMD5(k, d))
 }
 
-export const md5 = (string, key, raw) => {
+const md5 = (string, key, raw) => {
   if (!key) {
     if (!raw) {
       return hexMD5(string)
@@ -591,7 +591,7 @@ export const md5 = (string, key, raw) => {
  * (...args) => f(g(h(...args))).
  */
 
-export const compose = (...funcs) => {
+const compose = (...funcs) => {
   if (funcs.length === 0) {
     return arg => arg
   }
@@ -601,4 +601,9 @@ export const compose = (...funcs) => {
   }
 
   return funcs.reduce((a, b) => (...args) => a(b(...args)))
+}
+
+module.exports = {
+  makeId,
+  isNan
 }
